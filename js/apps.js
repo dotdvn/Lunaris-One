@@ -280,8 +280,6 @@ window.Apps = {
               <div style="text-align: center; margin-top: 40px;">
                 <img src="assets/logo.png" style="width: 80px; margin-bottom: 16px;">
                 <h2 style="font-weight: 300; font-size: 28px; margin-bottom: 8px;">Lunaris One</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 24px;">Version 1.0.0 (Build 2045)</p>
-                <p style="font-size: 14px; max-width: 300px; margin: 0 auto; line-height: 1.6;">A modern, browser-based operating system designed for focus and productivity. Built entirely with HTML, CSS, and JavaScript.</p>
               </div>
             </div>
           </div>

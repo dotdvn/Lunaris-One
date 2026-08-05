@@ -1,8 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   State.init();
-  window.FS.init().then(() => {
-    console.log("Virtual FileSystem initialized");
-  });
   const bootScreen = document.getElementById('boot-screen');
   const bootProgressBar = document.getElementById('boot-progress-bar');
   const bootStatusText = document.getElementById('boot-status-text');
