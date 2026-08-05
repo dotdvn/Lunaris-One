@@ -1,10 +1,21 @@
 # Lunaris One
-Lunaris One is a browser-based desktop operating system developed using HTML, CSS, and JavaScript.I initiated this project with the aim of creating a web-based OS that offers a genuine desktop experience rather than merely a set of windows displayed on a webpage.The objective is to ensure it feels smooth, minimal, and truly functional.
+
+Lunaris One is a desktop OS that works through a browser and is made using **HTML, CSS, and JavaScript**. The idea is drawn from space-themed systems, and the aim is to create a neat and user-friendly desktop.
 
 ## Features
-* Desktop-style interface with draggable windows
+
+* Movable desktop windows
 * Taskbar and launcher
-* Working browser app
-* Wallpaper system powered by the NASA APOD API
-* Music app using the iTunes Search API
-* Window management (open, close, minimize, and focus)
+* Functioning of the browser app
+* Dynamic wallpaper working via **NASA APOD API**
+* Music application functioning through **iTunes Search API**
+
+## Tech Stack
+
+* HTML
+* CSS
+* JavaScript
+* NASA APOD API
+* iTunes Search API
+
+This program is still being developed as part of the **Stardance WebOS** project.
