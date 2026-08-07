@@ -16,23 +16,6 @@ const State = {
       this.save();
     }
     this.applySettings();
-    
-    try {
-      const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=jmxUlCjGfzPgT0gJSenV0CozrFfdZOWKc9G59SUn');
-      if (response.ok) {
-        const apodData = await response.json();
-        if (apodData && apodData.url && apodData.media_type === 'image') {
-          if (!WALLPAPERS.includes(apodData.hdurl || apodData.url)) {
-            WALLPAPERS.unshift(apodData.hdurl || apodData.url);
-            this.data.wallpaperIndex = 0;
-            this.save();
-            this.applySettings();
-          }
-        }
-      }
-    } catch (e) {
-      console.error('Failed to fetch APOD', e);
-    }
   },
   
   save() {

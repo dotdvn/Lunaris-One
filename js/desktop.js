@@ -14,6 +14,7 @@ window.Desktop = {
   
   renderIcons() {
     this.iconsContainer.innerHTML = '';
+    let rightOffset = 24;
     APPS.forEach(app => {
       const el = document.createElement('div');
       el.className = 'desktop-icon';
@@ -23,6 +24,14 @@ window.Desktop = {
         </div>
         <div class="icon-text">${app.name}</div>
       `;
+      
+      if (['iss', 'mars', 'neo', 'epic', 'astro', 'news'].includes(app.id)) {
+        el.style.position = 'absolute';
+        el.style.right = '24px';
+        el.style.top = `${rightOffset}px`;
+        rightOffset += 140;
+      }
+
       el.addEventListener('dblclick', () => {
         el.classList.remove('selected');
         window.WM.createWindow(app);
@@ -163,5 +172,5 @@ window.Desktop = {
       this.renderNotifications();
       this.notificationsPanel.classList.add('show');
     }
-  }
+  },
 };

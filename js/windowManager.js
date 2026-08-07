@@ -47,7 +47,7 @@ class WindowManager {
         </div>
       </div>
       <div class="window-content" id="content-${app.id}">
-        <!-- App Content goes here -->
+
       </div>
     `;
     
@@ -157,10 +157,20 @@ class WindowManager {
     if (!this.isDragging || !this.dragWindow) return;
     
     const el = this.dragWindow.element;
+    
+    if (this.dragWindow.physicsFrame) {
+      cancelAnimationFrame(this.dragWindow.physicsFrame);
+    }
+    
     if (this.dragWindow.isMaximized) {
       this.toggleMaximize(this.dragWindow.id);
       this.dragOffset.x = parseInt(el.style.width) / 2;
     }
+    
+    this.dragVelocity = {
+      x: e.movementX,
+      y: e.movementY
+    };
     
     let newX = e.clientX - this.dragOffset.x;
     let newY = e.clientY - this.dragOffset.y;
@@ -172,14 +182,56 @@ class WindowManager {
   
   onMouseUp(e) {
     if (this.isDragging && this.dragWindow) {
-      this.dragWindow.element.classList.remove('dragging');
-      if (e.clientY <= 0 && !this.dragWindow.isMaximized) {
-        this.toggleMaximize(this.dragWindow.id);
+      const win = this.dragWindow;
+      win.element.classList.remove('dragging');
+      if (e.clientY <= 0 && !win.isMaximized) {
+        this.toggleMaximize(win.id);
+      } else if (this.dragVelocity && (Math.abs(this.dragVelocity.x) > 2 || Math.abs(this.dragVelocity.y) > 2)) {
+        this.applyZeroGravity(win, this.dragVelocity.x, this.dragVelocity.y);
       }
       
       this.isDragging = false;
       this.dragWindow = null;
+      this.dragVelocity = {x: 0, y: 0};
     }
+  }
+  
+  applyZeroGravity(win, vx, vy) {
+    const el = win.element;
+    let x = parseFloat(el.style.left) || 0;
+    let y = parseFloat(el.style.top) || 0;
+    let velocityX = vx * 0.9; 
+    let velocityY = vy * 0.9;
+    const friction = 0.985; 
+    
+    const step = () => {
+      if (this.isDragging && this.dragWindow && this.dragWindow.id === win.id) return; 
+      
+      x += velocityX;
+      y += velocityY;
+      
+      const rect = el.getBoundingClientRect();
+      const taskbarHeight = 48;
+      
+      if (x < 0) { x = 0; velocityX *= -0.8; }
+      if (x + rect.width > window.innerWidth) { x = window.innerWidth - rect.width; velocityX *= -0.8; }
+      if (y < 0) { y = 0; velocityY *= -0.8; }
+      if (y + rect.height > window.innerHeight - taskbarHeight) { 
+        y = window.innerHeight - taskbarHeight - rect.height; 
+        velocityY *= -0.8; 
+      }
+      
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      
+      velocityX *= friction;
+      velocityY *= friction;
+      
+      if (Math.abs(velocityX) > 0.1 || Math.abs(velocityY) > 0.1) {
+        win.physicsFrame = requestAnimationFrame(step);
+      }
+    };
+    win.physicsFrame = requestAnimationFrame(step);
   }
 }
 

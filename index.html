@@ -4,27 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lunaris One</title>
+  <title>Lunaris XP</title>
 
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  
+
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-  
+
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  
+
   <div id="boot-screen" class="overlay flex-center">
     <div class="boot-content">
       <img src="assets/logo.png" alt="Lunaris Logo" class="boot-logo">
-      <h1 class="boot-title">Lunaris One</h1>
+      <h1 class="boot-title">Lunaris XP</h1>
       <div class="boot-ring"></div>
       <div class="boot-status" id="boot-status-text">Initializing Lunar Core</div>
       <div class="boot-progress">
@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  
+
   <div id="lock-screen" class="overlay flex-center hidden">
     <div class="lock-bg wallpaper-bg"></div>
     <div class="lock-content">
@@ -51,30 +51,30 @@
     </div>
   </div>
 
-  
+
   <div id="desktop" class="hidden">
     <div class="desktop-bg wallpaper-bg"></div>
 
-    
+
     <div class="desktop-icons" id="desktop-icons">
-      
+
     </div>
 
-    
+
     <div id="windows-container"></div>
 
-    
+
     <div id="notifications-panel" class="glass-panel hidden">
       <div class="panel-header">
         <h3>Notifications</h3>
         <button id="btn-clear-notifications" class="icon-btn"><i class="ph ph-trash"></i></button>
       </div>
       <div class="notifications-list" id="notifications-list">
-        
+
       </div>
     </div>
 
-    
+
     <div id="quick-settings-panel" class="glass-panel hidden">
       <div class="quick-settings-grid">
         <div class="qs-toggle active"><i class="ph ph-wifi-high"></i><span>Wi-Fi</span></div>
@@ -94,7 +94,7 @@
       </div>
     </div>
 
-    
+
     <div id="launcher" class="glass-panel hidden">
       <div class="launcher-search">
         <i class="ph ph-magnifying-glass"></i>
@@ -103,12 +103,12 @@
       <div class="launcher-section">
         <h4>Pinned Apps</h4>
         <div class="launcher-grid" id="launcher-grid">
-          
+
         </div>
       </div>
     </div>
 
-    
+
     <div id="taskbar" class="glass-panel">
       <div class="taskbar-left">
         <button id="btn-launcher" class="taskbar-btn logo-btn">
@@ -117,19 +117,16 @@
       </div>
 
       <div class="taskbar-center" id="taskbar-apps">
-        
+
       </div>
 
       <div class="taskbar-right">
         <div class="taskbar-time" id="taskbar-time">10:00 AM</div>
-        <div class="taskbar-notifications" id="btn-notifications">
-          <i class="ph ph-bell"></i>
-        </div>
       </div>
     </div>
   </div>
 
-  
+
   <div id="context-menu" class="glass-panel hidden">
     <div class="context-item"><i class="ph ph-folder-plus"></i> New Folder</div>
     <div class="context-item"><i class="ph ph-file-plus"></i> New File</div>
@@ -138,11 +135,10 @@
     <div class="context-item"><i class="ph ph-arrows-clockwise"></i> Refresh</div>
   </div>
 
-  
+
   <script src="js/config.js"></script>
   <script src="js/state.js"></script>
   <script src="js/utils.js"></script>
-  <script src="js/audioEngine.js"></script>
   <script src="js/windowManager.js"></script>
   <script src="js/desktop.js"></script>
   <script src="js/taskbar.js"></script>

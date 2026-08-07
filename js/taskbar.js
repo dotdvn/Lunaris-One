@@ -4,14 +4,21 @@ window.Taskbar = {
     this.appsContainer = document.getElementById('taskbar-apps');
     this.updateTime();
     setInterval(() => this.updateTime(), 1000);
-    document.getElementById('btn-quick-settings').addEventListener('click', (e) => {
-      e.stopPropagation();
-      window.Desktop.toggleQuickSettings();
-    });
-    document.getElementById('btn-notifications').addEventListener('click', (e) => {
-      e.stopPropagation();
-      window.Desktop.toggleNotifications();
-    });
+    const btnQuickSettings = document.getElementById('btn-quick-settings');
+    if (btnQuickSettings) {
+      btnQuickSettings.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.Desktop.toggleQuickSettings();
+      });
+    }
+
+    const btnNotifications = document.getElementById('btn-notifications');
+    if (btnNotifications) {
+      btnNotifications.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.Desktop.toggleNotifications();
+      });
+    }
     document.getElementById('btn-launcher').addEventListener('click', (e) => {
       e.stopPropagation();
       window.Desktop.toggleLauncher();

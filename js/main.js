@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       Desktop.init();
       Taskbar.init();
       setTimeout(() => {
-        State.addNotification('System Ready', 'Welcome to Lunaris One. All systems nominal.', 'ph-rocket-launch');
+        State.addNotification('System Ready', 'Welcome to Lunaris XP. All systems nominal.', 'ph-rocket-launch');
       }, 1000);
       
     }, 800);

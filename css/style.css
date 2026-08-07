@@ -1,45 +1,41 @@
 :root {
+  --bg-dark: #245edb;
+  --bg-darker: #0058e6;
+  --accent-silver: #ece9d8;
+  --accent-violet: #3a93ff;
+  --accent-blue: #0058e6;
   
-  --bg-dark: #0a0b10;
-  --bg-darker: #050608;
-  --accent-silver: #c0c5ce;
-  --accent-violet: #6b5b95;
-  --accent-blue: #4a6fa5;
+  --text-primary: #000000;
+  --text-secondary: #333333;
   
-  --text-primary: #f0f2f5;
-  --text-secondary: #a0a5b0;
+
+  --glass-bg: #ece9d8;
+  --glass-border: #0058e6;
+  --glass-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  --glass-blur: blur(0px);
   
+  --window-bg: #ece9d8;
+  --panel-bg: #ffffff;
   
-  --glass-bg: rgba(20, 22, 30, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-  --glass-blur: blur(16px);
+
+  --radius-lg: 8px;
+  --radius-md: 8px 8px 0 0;
+  --radius-sm: 4px;
   
+  --taskbar-height: 30px;
   
-  --window-bg: rgba(15, 17, 25, 0.75);
-  --panel-bg: rgba(20, 22, 30, 0.65);
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 8px;
+  --transition-fast: 0.1s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.3s ease;
   
-  
-  --taskbar-height: 56px;
-  
-  
-  --transition-fast: 0.15s ease-out;
-  --transition-normal: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-  --transition-slow: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  
-  
-  --font-main: 'Inter', sans-serif;
+  --font-main: 'Tahoma', 'Segoe UI', sans-serif;
 }
 
-
 body.moon-mode {
-  --accent-violet: #5a759e;
-  --glass-bg: rgba(10, 15, 25, 0.5);
-  --window-bg: rgba(8, 12, 20, 0.85);
-  --glass-border: rgba(150, 180, 255, 0.15);
+  --glass-bg: #c0c0c0;
+  --window-bg: #c0c0c0;
+  --text-primary: #000000;
+  --text-secondary: #000000;
 }
 
 * {
@@ -204,19 +200,22 @@ body.moon-mode .wallpaper-bg {
   margin-bottom: 24px;
 }
 .btn-primary {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: white;
+  background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(150, 220, 255, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 1);
+  color: var(--text-primary);
   padding: 10px 32px;
-  border-radius: 20px;
+  border-radius: 24px;
   font-size: 16px;
   font-family: inherit;
+  font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,1);
   transition: all var(--transition-fast);
 }
 .btn-primary:hover {
-  background: rgba(255,255,255,0.2);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(180, 230, 255, 1) 100%);
   transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,1);
 }
 
 
@@ -276,6 +275,7 @@ body.moon-mode .wallpaper-bg {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
+  color: white;
 }
 
 
@@ -285,15 +285,13 @@ body.moon-mode .wallpaper-bg {
   left: 0;
   width: 100%;
   height: var(--taskbar-height);
-  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 0;
-  border-bottom: none;
-  border-left: none;
-  border-right: none;
+  border-top: 1px solid #1042af;
+  background: linear-gradient(180deg, #245edb 0%, #3f8cf3 5%, #245edb 10%, #245edb 90%, #1941a5 100%);
   z-index: 1000;
+  box-shadow: none;
 }
 .taskbar-left, .taskbar-center, .taskbar-right {
   display: flex;
@@ -306,37 +304,35 @@ body.moon-mode .wallpaper-bg {
   justify-content: flex-start;
 }
 .taskbar-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 6px;
-  background: transparent;
-  border: none;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #3a80f0 0%, #1e5ec4 100%);
+  border: 1px solid #1042af;
   color: white;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all var(--transition-fast);
+  transition: none;
   position: relative;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
 }
 .taskbar-btn:hover {
-  background: rgba(255,255,255,0.1);
+  background: linear-gradient(180deg, #4f91ff 0%, #296cdf 100%);
 }
 .taskbar-btn.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--accent-silver);
-  border-radius: 2px;
+  display: none;
 }
 .taskbar-btn.open {
-  background: rgba(255,255,255,0.05);
+  background: linear-gradient(180deg, #1e5ec4 0%, #174ab0 100%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
 }
 .taskbar-btn.open.active {
-  background: rgba(255,255,255,0.15);
+  background: linear-gradient(180deg, #1646a7 0%, #103889 100%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+  border-color: #0c2b6b;
 }
 .taskbar-btn.open::after {
   content: '';
@@ -350,33 +346,47 @@ body.moon-mode .wallpaper-bg {
   background: var(--accent-silver);
 }
 .logo-btn {
-  padding: 4px;
+  padding: 0 16px;
+  background: linear-gradient(180deg, #48aa38 0%, #358b29 100%);
+  border-radius: 0 10px 10px 0;
+  border: 1px solid #1a6e13;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), inset 2px 0 3px rgba(255,255,255,0.3);
+  margin-left: -24px;
+}
+.logo-btn::after {
+  content: 'start';
+}
+.logo-btn:hover {
+  background: linear-gradient(180deg, #59c546 0%, #40a831 100%);
 }
 .taskbar-logo {
-  width: 28px;
-  height: 28px;
-  filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
-}
-.system-tray {
-  display: flex;
-  gap: 12px;
-  padding: 8px 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background var(--transition-fast);
-}
-.system-tray:hover {
-  background: rgba(255,255,255,0.1);
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
 }
 .taskbar-time {
-  font-size: 13px;
-  padding: 8px 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background var(--transition-fast);
+  font-size: 11px;
+  padding: 0 12px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, #108be6 0%, #1573c8 100%);
+  border-left: 1px solid rgba(255,255,255,0.3);
+  margin-right: -24px;
+  color: white;
+  text-shadow: none;
 }
 .taskbar-time:hover {
-  background: rgba(255,255,255,0.1);
+  background: linear-gradient(180deg, #209cf5 0%, #1c81d8 100%);
 }
 .taskbar-notifications {
   width: 40px;
@@ -463,7 +473,7 @@ body.moon-mode .wallpaper-bg {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  box-shadow: 0 10px 30px rgba(0,50,80,0.3), inset 0 2px 5px rgba(255,255,255,0.8);
   border-radius: var(--radius-md);
   display: flex;
   flex-direction: column;
@@ -489,43 +499,48 @@ body.moon-mode .wallpaper-bg {
   pointer-events: none;
 }
 .window-titlebar {
-  height: 40px;
-  background: rgba(0,0,0,0.2);
+  height: 30px;
+  background: linear-gradient(180deg, #0058e6 0%, #3a93ff 12%, #0058e6 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 4px 0 8px;
   cursor: default;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid #000;
+  box-shadow: none;
 }
 .window-title {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: bold;
+  color: #fff;
   flex: 1;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 .window-controls {
   display: flex;
-  gap: 8px;
+  gap: 2px;
 }
 .win-btn {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  background: linear-gradient(180deg, #5398f6 0%, #1d61df 100%);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 14px;
   cursor: pointer;
-  background: transparent;
-  color: var(--text-secondary);
-  transition: all var(--transition-fast);
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
 }
-.win-btn:hover { background: rgba(255,255,255,0.1); color: white; }
-.win-btn.close:hover { background: #e81123; color: white; }
+.win-btn:hover { background: linear-gradient(180deg, #74b3ff 0%, #2f7cf3 100%); }
+.win-btn.close { background: linear-gradient(180deg, #e87b7a 0%, #d83b38 100%); }
+.win-btn.close:hover { background: linear-gradient(180deg, #f09594 0%, #e84d49 100%); }
 .window-content {
   flex: 1;
   position: relative;
