@@ -409,10 +409,10 @@ window.Apps = {
 
       const updateISS = async () => {
         try {
-          const res = await fetch('http://api.open-notify.org/iss-now.json');
+          const res = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
           const data = await res.json();
-          const lat = parseFloat(data.iss_position.latitude);
-          const lng = parseFloat(data.iss_position.longitude);
+          const lat = parseFloat(data.latitude);
+          const lng = parseFloat(data.longitude);
 
           if (container.querySelector('#iss-lat')) {
             container.querySelector('#iss-lat').textContent = lat.toFixed(4);
@@ -656,7 +656,7 @@ window.Apps = {
 
       const fetchAstros = async () => {
         try {
-          const res = await fetch('http://api.open-notify.org/astros.json');
+          const res = await fetch('https://api.allorigins.win/raw?url=http://api.open-notify.org/astros.json');
           const data = await res.json();
 
           if (container.querySelector('#astro-count')) {
