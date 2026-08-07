@@ -1,4 +1,4 @@
-# Lunaris One
+# Lunaris XP
 
 Lunaris One is a desktop OS that works through a browser and is made using **HTML, CSS, and JavaScript**. The idea is drawn from space-themed systems, and the aim is to create a neat and user-friendly desktop.
 
