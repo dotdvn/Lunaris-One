@@ -16,6 +16,5 @@ Lunaris One is a desktop OS that works through a browser and is made using **HTM
 * CSS
 * JavaScript
 * NASA APOD API
-* iTunes Search API
 
 This program is still being developed as part of the **Stardance WebOS** project.
