@@ -176,13 +176,48 @@ window.Desktop = {
   },
   
   initPet() {
+    const spaceFacts = [
+      "One million Earths could fit inside the Sun!",
+      "You wouldn't be able to walk on Jupiter, Saturn, Uranus or Neptune because they have no solid surface!",
+      "If you could fly a plane to Pluto, the trip would take more than 800 years!",
+      "Space is completely silent. There is no atmosphere in space, which means that sound has no medium or way to travel.",
+      "The hottest planet in our solar system is Venus, not Mercury!",
+      "A full NASA space suit costs around $12,000,000.",
+      "The mass of the sun takes up 99.86% of the solar system.",
+      "One day on Venus is longer than one year on Earth.",
+      "There is a planet made of diamonds twice the size of Earth called '55 Cancri e'.",
+      "The footprints on the Moon will be there for 100 million years."
+    ];
+
     this.pet = document.createElement('div');
     this.pet.id = 'desktop-pet';
-    this.pet.innerHTML = `<img src="assets/icon_neo.png" style="width: 48px; height: 48px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5));">`;
     this.pet.style.position = 'absolute';
     this.pet.style.zIndex = '50';
-    this.pet.style.pointerEvents = 'none';
+    this.pet.style.cursor = 'pointer';
+    
+    this.pet.innerHTML = `
+      <div id="bennu-popup" style="display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #ffffe1; border: 1px solid #000; padding: 4px 8px; width: 160px; font-size: 11px; font-family: Tahoma; color: #000; box-shadow: 2px 2px 3px rgba(0,0,0,0.2); z-index: 51; pointer-events: none; margin-bottom: 20px;"></div>
+      <img src="assets/icon_neo.png" style="width: 48px; height: 48px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5)); transition: transform 0.2s;">
+    `;
     this.desktop.appendChild(this.pet);
+
+    let isEnlarged = false;
+    let popupTimeout;
+
+    this.pet.addEventListener('click', (e) => {
+      e.stopPropagation();
+      isEnlarged = true;
+      const popup = this.pet.querySelector('#bennu-popup');
+      
+      popup.innerHTML = `<strong>Bennu's Fact:</strong><br>${spaceFacts[Math.floor(Math.random() * spaceFacts.length)]}`;
+      popup.style.display = 'block';
+
+      clearTimeout(popupTimeout);
+      popupTimeout = setTimeout(() => {
+        isEnlarged = false;
+        popup.style.display = 'none';
+      }, 5000);
+    });
 
     let x = Math.random() * (window.innerWidth - 100);
     let y = Math.random() * (window.innerHeight - 100);
@@ -191,16 +226,22 @@ window.Desktop = {
     let rotation = 0;
 
     const animate = () => {
-      x += vx;
-      y += vy;
-      rotation += 0.5;
+      if (!isEnlarged) {
+        x += vx;
+        y += vy;
+        rotation += 0.5;
 
-      if (x <= 0 || x >= window.innerWidth - 48) vx *= -1;
-      if (y <= 0 || y >= window.innerHeight - 48 - 40) vy *= -1;
+        if (x <= 0 || x >= window.innerWidth - 48) vx *= -1;
+        if (y <= 0 || y >= window.innerHeight - 48 - 40) vy *= -1;
+      } else {
+        rotation += 0.1; // Slow spin when enlarged
+      }
 
       this.pet.style.left = `${x}px`;
       this.pet.style.top = `${y}px`;
-      this.pet.style.transform = `rotate(${rotation}deg)`;
+      
+      const currentScale = isEnlarged ? 2 : 1;
+      this.pet.querySelector('img').style.transform = `scale(${currentScale}) rotate(${rotation}deg)`;
 
       requestAnimationFrame(animate);
     };
