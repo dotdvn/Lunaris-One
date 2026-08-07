@@ -589,7 +589,7 @@ window.Apps = {
 
       const fetchAstros = async () => {
         try {
-          const res = await fetch('https://api.allorigins.win/raw?url=http://api.open-notify.org/astros.json');
+          const res = await fetch('https://corquaid.github.io/international-space-station-APIs/JSON/people-in-space.json');
           const data = await res.json();
 
           if (container.querySelector('#astro-count')) {
@@ -598,9 +598,9 @@ window.Apps = {
             let html = '';
             data.people.forEach(person => {
               html += `
-                <div style="background: #fff; border: 2px inset #fff; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="background: #fff; border: 2px inset #fff; padding: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                   <div style="font-weight: bold;">${person.name}</div>
-                  <div style="font-size: 12px; background: #ece9d8; border: 1px solid #aca899; padding: 4px 8px; display: inline-block;">${person.craft}</div>
+                  <div style="font-size: 12px; background: #ece9d8; border: 1px solid #aca899; padding: 4px 8px; display: inline-block;">${person.craft || 'Space'}</div>
                 </div>
               `;
             });
