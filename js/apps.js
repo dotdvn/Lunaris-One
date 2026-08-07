@@ -39,8 +39,6 @@ window.Apps = {
         <div style="display: flex; flex-direction: column; height: 100%;">
           <div style="padding: 8px; background: rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; gap: 8px;">
             <button class="btn-primary" style="padding: 4px 12px; font-size: 13px;" id="btn-save-note">Save</button>
-            <button class="win-btn" title="Bold"><i class="ph ph-text-b"></i></button>
-            <button class="win-btn" title="Italic"><i class="ph ph-text-italic"></i></button>
           </div>
           <textarea id="note-area" style="flex: 1; background: transparent; border: none; padding: 16px; color: white; resize: none; outline: none; font-family: var(--font-main); font-size: 15px; line-height: 1.5;">${savedNote}</textarea>
         </div>
@@ -50,71 +48,6 @@ window.Apps = {
       container.querySelector('#btn-save-note').addEventListener('click', () => {
         localStorage.setItem('lunaris_note', area.value);
         State.addNotification('Note Saved', 'Your note has been saved to local storage.', 'ph-check-circle');
-      });
-    }
-  },
-
-  terminal: {
-    init(container) {
-      container.innerHTML = `
-        <div style="background: rgba(10, 10, 15, 0.95); height: 100%; padding: 16px; font-family: monospace; color: #a5d6a7; overflow-y: auto;" id="term-container">
-          <div id="term-output">
-            Lunaris XP Terminal [Version 1.0.0]<br>
-            (c) Lunar Systems. All rights reserved.<br><br>
-            Type 'help' for a list of available commands.<br><br>
-          </div>
-          <div style="display: flex; align-items: center;">
-            <span style="color: #64b5f6;">user@lunaris</span><span style="color: #fff;">:</span><span style="color: #9ccc65;">~</span><span style="color: #fff;">$ </span>
-            <input type="text" id="term-input" style="flex: 1; background: transparent; border: none; color: #fff; outline: none; font-family: monospace; font-size: 14px; margin-left: 8px;" autofocus>
-          </div>
-        </div>
-      `;
-
-      const input = container.querySelector('#term-input');
-      const output = container.querySelector('#term-output');
-      const termCont = container.querySelector('#term-container');
-
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          const cmd = input.value.trim();
-          output.innerHTML += `<div style="margin-top: 4px;"><span style="color: #64b5f6;">user@lunaris</span><span style="color: #fff;">:</span><span style="color: #9ccc65;">~</span><span style="color: #fff;">$ </span>${cmd}</div>`;
-          input.value = '';
-
-          let res = '';
-          const args = cmd.split(' ');
-
-          switch (args[0].toLowerCase()) {
-            case 'help': res = 'Available commands: help, clear, date, time, echo, ls, pwd, whoami, version, launch'; break;
-            case 'clear': output.innerHTML = ''; break;
-            case 'date': res = new Date().toLocaleDateString(); break;
-            case 'time': res = new Date().toLocaleTimeString(); break;
-            case 'echo': res = args.slice(1).join(' '); break;
-            case 'ls': res = 'Documents Downloads Pictures Music Projects readme.txt'; break;
-            case 'pwd': res = '/home/user'; break;
-            case 'whoami': res = State.data.username.toLowerCase().replace(' ', '_'); break;
-            case 'version': res = 'Lunaris XP v1.0.0 (Lunar Core)'; break;
-            case 'launch':
-              if (args[1]) {
-                const app = APPS.find(a => a.id === args[1].toLowerCase());
-                if (app) {
-                  window.WM.createWindow(app);
-                  res = `Launching ${app.name}...`;
-                } else {
-                  res = `App not found: ${args[1]}`;
-                }
-              } else {
-                res = 'Usage: launch <appid>';
-              }
-              break;
-            case '': break;
-            default: res = `Command not found: ${args[0]}`;
-          }
-
-          if (res) {
-            output.innerHTML += `<div style="color: #fff;">${res}</div>`;
-          }
-          termCont.scrollTop = termCont.scrollHeight;
-        }
       });
     }
   },
