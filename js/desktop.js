@@ -10,6 +10,7 @@ window.Desktop = {
     this.renderIcons();
     this.bindEvents();
     this.renderLauncher();
+    this.initPet();
   },
   
   renderIcons() {
@@ -173,4 +174,36 @@ window.Desktop = {
       this.notificationsPanel.classList.add('show');
     }
   },
+  
+  initPet() {
+    this.pet = document.createElement('div');
+    this.pet.id = 'desktop-pet';
+    this.pet.innerHTML = `<img src="assets/icon_neo.png" style="width: 48px; height: 48px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5));">`;
+    this.pet.style.position = 'absolute';
+    this.pet.style.zIndex = '50';
+    this.pet.style.pointerEvents = 'none';
+    this.desktop.appendChild(this.pet);
+
+    let x = Math.random() * (window.innerWidth - 100);
+    let y = Math.random() * (window.innerHeight - 100);
+    let vx = (Math.random() > 0.5 ? 1 : -1) * 1.5;
+    let vy = (Math.random() > 0.5 ? 1 : -1) * 1.5;
+    let rotation = 0;
+
+    const animate = () => {
+      x += vx;
+      y += vy;
+      rotation += 0.5;
+
+      if (x <= 0 || x >= window.innerWidth - 48) vx *= -1;
+      if (y <= 0 || y >= window.innerHeight - 48 - 40) vy *= -1;
+
+      this.pet.style.left = `${x}px`;
+      this.pet.style.top = `${y}px`;
+      this.pet.style.transform = `rotate(${rotation}deg)`;
+
+      requestAnimationFrame(animate);
+    };
+    animate();
+  }
 };
